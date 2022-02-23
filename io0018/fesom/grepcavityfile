@@ -1,0 +1,229 @@
+fesom_main.F90:#ifdef use_cavity
+fesom_main.F90:  call cavity_momentum_fluxes
+fesom_main.F90:  call cavity_heat_water_fluxes_3eq
+Übereinstimmungen in Binärdatei fesom_main.o.
+Übereinstimmungen in Binärdatei fesom_part.x.
+Übereinstimmungen in Binärdatei fesom.x.
+gen_warning.F90:#ifdef use_cavity
+gen_warning.F90:  write(*,*) 'You need to specify your own way to initialize T/S under the cavity.'
+gen_warning.F90:  write(*,*) 'Example routines are in file oce_cavity.'
+gen_warning.F90:        write(*,'(a11,i8,i7,i3,i3,2f8.2,f8.1,2f6.2,2f6.1)')'uv>10: u at',i,nsurf,kcrit,cavity_flag_nod2d(nod2d_corresp_to_nod3d(i)), &
+gen_warning.F90:        write(*,'(a11,i8,i7,i3,i3,2f8.2,f8.1,2f6.2,2f6.1)')'uv>10: v at',i,nsurf,kcrit,cavity_flag_nod2d(nod2d_corresp_to_nod3d(i)), &
+gen_warning.F90.LK46405:#ifdef use_cavity
+gen_warning.F90.LK46405:  write(*,*) 'You need to specify your own way to initialize T/S under the cavity.'
+gen_warning.F90.LK46405:  write(*,*) 'Example routines are in file oce_cavity.'
+gen_warning.F90.LK46405:        write(*,*)'u>10 at',i,nsurf,kcrit,cavity_flag_nod2d(nod2d_corresp_to_nod3d(i))
+gen_warning.F90.LK46405:        write(*,*)'v>10 at',i,nsurf,kcrit, cavity_flag_nod2d(nod2d_corresp_to_nod3d(i))
+Übereinstimmungen in Binärdatei gen_warning.o.
+ice_advection.F90:#ifdef use_cavity
+ice_advection.F90:     if (any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_advection.F90:#ifdef use_cavity
+ice_advection.F90:    if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_advection.F90:#ifdef use_cavity   !LK89140 0/0 
+ice_advection.F90:     if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle
+ice_advection.F90:#ifdef use_cavity
+ice_advection.F90:        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140 0/0 
+ice_advection.F90:#ifdef use_cavity
+ice_advection.F90:        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140  
+Übereinstimmungen in Binärdatei ice_advection.o.
+ice_coupling.F90:  ! Fluxed under cavity are computed in a separated routine.
+ice_coupling.F90:#ifdef use_cavity
+ice_coupling.F90:     if(cavity_flag_nod2d(row)==1) cycle
+Übereinstimmungen in Binärdatei ice_coupling.o.
+ice_dyn.F90:#ifdef use_cavity   !LK89140 0/0 
+ice_dyn.F90:   if(cavity_flag_nod2d(row)==1) cycle
+ice_dyn.F90:#ifdef use_cavity    
+ice_dyn.F90:        if(index_nod3D(j)==11 .or. cavity_flag_extended(i)==1) then 
+ice_dyn.F90:#ifdef use_cavity        
+ice_dyn.F90:        if (index_nod3D(i)==11 .or. cavity_flag_extended(i)==1) cycle 
+Übereinstimmungen in Binärdatei ice_dyn.o.
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !0/0 LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_fct.F90:!#ifdef use_cavity
+ice_fct.F90:!        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140
+ice_fct.F90:!#ifdef use_cavity
+ice_fct.F90:!        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140
+ice_fct.F90:!#ifdef use_cavity
+ice_fct.F90:!        if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_fct.F90:!#ifdef use_cavity
+ice_fct.F90:!     if(cavity_flag_nod2d(row)==1 .or. ice_lump(row)==0.) cycle !LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+ice_fct.F90:#ifdef use_cavity
+ice_fct.F90:     if(any(cavity_flag_nod2d(elnodes)==1)) cycle !LK89140
+Übereinstimmungen in Binärdatei ice_fct.o.
+ice_init.F90:           if(cavity_flag_nod2d(i)==1) cycle              
+Übereinstimmungen in Binärdatei ice_init.o.
+ice_step.F90:#ifdef use_cavity
+ice_step.F90:  call clean_cavity_vel
+ice_step.F90:!#ifdef use_cavity     !LK89140
+ice_step.F90:!  call clean_cavity_m !!! we don't need this if there is no flux of tracers to the cavity nodes
+ice_step.F90:subroutine clean_cavity_vel
+ice_step.F90:     if(cavity_flag_extended(row)==1) then  !LK89140
+ice_step.F90:end subroutine clean_cavity_vel
+ice_step.F90:subroutine clean_cavity_m
+ice_step.F90:     if(cavity_flag_nod2d(row)==1) then 
+ice_step.F90:end subroutine clean_cavity_m
+Übereinstimmungen in Binärdatei ice_step.o.
+ice_thermo.F90:#ifdef use_cavity
+ice_thermo.F90:     if(cavity_flag_nod2d(i)==1) cycle
+ice_thermo.lst:   35| 000278 lwzx     7C63282E   1     L4Z       gr3=cavity_flag_nod2d(gr3,gr5,0,trap=gr640)
+Übereinstimmungen in Binärdatei ice_thermo.o.
+Makefile:		oce_cavity.o				\
+Makefile.hlrn4:		oce_cavity.o				\
+Makefile.in:CPP_DEFS= -Duse_tracer_fct -Dallow_calcmeans -Dallow_diag -Duse_ice -Duse_ice_fct -Duse_cavity
+Makefile.in:# -Duse_cavity
+Makefile.in:# 2) use_cavity only works with sigma grid currently
+Makefile.in.hlrn4:CPP_DEFS= -Duse_tracer_fct -Dallow_calcmeans -Dallow_diag -Duse_ice -Duse_ice_fct -Duse_cavity
+Makefile.in.hlrn4:# -Duse_cavity
+Makefile.in.hlrn4:# 2) use_cavity only works with sigma grid currently
+oce_cavity.F90:subroutine init_cavity_ts_use_profile
+oce_cavity.F90:  ! Initialize the T/S under cavity by specifying a profile
+oce_cavity.F90:  ! For cavity alone, one can use the cavity_flag_nod2d index.
+oce_cavity.F90:end subroutine init_cavity_ts_use_profile
+oce_cavity.F90:subroutine init_cavity_ts_extrapolate
+oce_cavity.F90:  ! fill the ocean under the cavity with T/S at the cavity edge
+oce_cavity.F90:  ! define the cavity boundary line
+oce_cavity.F90:     if(cavity_flag_nod2d(row)==0 .and. &
+oce_cavity.F90:          any(cavity_flag_nod2d(nghbr_nod2d(row)%addresses)==1)) then 
+oce_cavity.F90:     if(cavity_flag_nod2d(row)==0) cycle
+oce_cavity.F90:  ! interpolate to the nodes under cavity
+oce_cavity.F90:     if(cavity_flag_nod2d(n2)==0) cycle
+oce_cavity.F90:end subroutine init_cavity_ts_extrapolate
+oce_cavity.F90:subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90:!      write(*,*)'cavity do heat conduction with variable near-base temperature of ',tice
+oce_cavity.F90:!        write(*,*)'cavity do freezing with tin=',tin
+oce_cavity.F90:!        write(*,*)'cavity do melting with tin=',tin
+oce_cavity.F90:end subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90:subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90:  ! Compute the heat and freshwater fluxes under ice cavity
+oce_cavity.F90:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90:end subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90:subroutine cavity_momentum_fluxes
+oce_cavity.F90:  ! Compute the momentum fluxes under ice cavity
+oce_cavity.F90:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90:end subroutine cavity_momentum_fluxes
+oce_cavity.F90.RG44025:subroutine init_cavity_ts_use_profile
+oce_cavity.F90.RG44025:  ! Initialize the T/S under cavity by specifying a profile
+oce_cavity.F90.RG44025:  ! For cavity alone, one can use the cavity_flag_nod2d index.
+oce_cavity.F90.RG44025:end subroutine init_cavity_ts_use_profile
+oce_cavity.F90.RG44025:subroutine init_cavity_ts_extrapolate
+oce_cavity.F90.RG44025:  ! fill the ocean under the cavity with T/S at the cavity edge
+oce_cavity.F90.RG44025:  ! define the cavity boundary line
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(row)==0 .and. &
+oce_cavity.F90.RG44025:          any(cavity_flag_nod2d(nghbr_nod2d(row)%addresses)==1)) then 
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(row)==0) cycle
+oce_cavity.F90.RG44025:  ! interpolate to the nodes under cavity
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(n2)==0) cycle
+oce_cavity.F90.RG44025:end subroutine init_cavity_ts_extrapolate
+oce_cavity.F90.RG44025:subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44025:end subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90.RG44025:subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90.RG44025:  ! Compute the heat and freshwater fluxes under ice cavity
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44025:end subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90.RG44025:subroutine cavity_momentum_fluxes
+oce_cavity.F90.RG44025:  ! Compute the momentum fluxes under ice cavity
+oce_cavity.F90.RG44025:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44025:end subroutine cavity_momentum_fluxes
+oce_cavity.F90.RG44027:subroutine init_cavity_ts_use_profile
+oce_cavity.F90.RG44027:  ! Initialize the T/S under cavity by specifying a profile
+oce_cavity.F90.RG44027:  ! For cavity alone, one can use the cavity_flag_nod2d index.
+oce_cavity.F90.RG44027:end subroutine init_cavity_ts_use_profile
+oce_cavity.F90.RG44027:subroutine init_cavity_ts_extrapolate
+oce_cavity.F90.RG44027:  ! fill the ocean under the cavity with T/S at the cavity edge
+oce_cavity.F90.RG44027:  ! define the cavity boundary line
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(row)==0 .and. &
+oce_cavity.F90.RG44027:          any(cavity_flag_nod2d(nghbr_nod2d(row)%addresses)==1)) then 
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(row)==0) cycle
+oce_cavity.F90.RG44027:  ! interpolate to the nodes under cavity
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(n2)==0) cycle
+oce_cavity.F90.RG44027:end subroutine init_cavity_ts_extrapolate
+oce_cavity.F90.RG44027:subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44027:end subroutine cavity_heat_water_fluxes_3eq
+oce_cavity.F90.RG44027:subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90.RG44027:  ! Compute the heat and freshwater fluxes under ice cavity
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44027:end subroutine cavity_heat_water_fluxes_2eq
+oce_cavity.F90.RG44027:subroutine cavity_momentum_fluxes
+oce_cavity.F90.RG44027:  ! Compute the momentum fluxes under ice cavity
+oce_cavity.F90.RG44027:     if(cavity_flag_nod2d(n)==0) cycle   
+oce_cavity.F90.RG44027:end subroutine cavity_momentum_fluxes
+Übereinstimmungen in Binärdatei oce_cavity.o.
+oce_dens_press.F90:  ! -- In case under cavities, assume that the cavity draft does not go deeper than
+oce_dens_press.F90:  ! -- In case under cavities, assume that the cavity draft does not go deeper than
+oce_init.F90:#ifdef use_cavity
+oce_init.F90:     call init_cavity_ts_extrapolate
+oce_init.F90:     !rt call init_cavity_ts_use_profile
+Übereinstimmungen in Binärdatei oce_init.o.
+oce_init_special_case.F90:  ! init T/S source for cavity test case of Hunter 1NN
+oce_mixing_my2p5.F90:       if(cavity_flag_nod2d(row)==0) then       
+oce_mixing_my2p5.F90:       if(cavity_flag_nod2d(row)==0) then      
+oce_mixing_my2p5.F90:       else  !under the cavity
+Übereinstimmungen in Binärdatei oce_mixing_my2p5.o.
+oce_mixing_pp.F90:#ifdef use_cavity
+oce_mixing_pp.F90:          mo_on=(add_tb04_to_PP .and. cavity_flag_nod2d(col)==0)
+oce_mixing_pp.F90:#ifdef use_cavity
+oce_mixing_pp.F90:     if (Av(i)  .lt.wndmix .and. cavity_flag_nod2d(i).eq.0)  Av(i)=wndmix
+oce_mixing_pp.F90:     if (Kv(i,1).lt.wndmix .and. cavity_flag_nod2d(i).eq.0) Kv(i,1)=wndmix 
+oce_mixing_pp.F90.RG44025:#ifdef use_cavity
+oce_mixing_pp.F90.RG44025:          mo_on=(add_tb04_to_PP .and. cavity_flag_nod2d(col)==0)
+oce_mixing_pp.F90.RG44025:#ifdef use_cavity
+oce_mixing_pp.F90.RG44025:     if (Av(i)  .lt.wndmix .and. cavity_flag_nod2d(i).eq.0)  Av(i)=wndmix
+oce_mixing_pp.F90.RG44025:     if (Kv(i,1).lt.wndmix .and. cavity_flag_nod2d(i).eq.0) Kv(i,1)=wndmix 
+Übereinstimmungen in Binärdatei oce_mixing_pp.o.
+oce_modules.F90:  ! for cases using cavity
+oce_modules.F90:  integer, allocatable, dimension(:)           :: cavity_flag_nod2d
+oce_modules.F90:  integer, allocatable, dimension(:)           :: cavity_flag_extended
+Übereinstimmungen in Binärdatei oce_modules.o.
+oce_passive_tracer.F90:! Special version originally created for Clara Stolle's master thesis and used to detect water mass pathways in FRIS cavity.
+oce_read_mesh.F90:! Some extra info. (nodal flag for cavity, region type
+oce_read_mesh.F90:  allocate(cavity_flag_nod2d(myDim_nod2d+eDim_nod2d))
+oce_read_mesh.F90:  cavity_flag_nod2d=0
+oce_read_mesh.F90:  ! 1 under cavity, 0 outside cavity
+oce_read_mesh.F90:#ifdef use_cavity
+oce_read_mesh.F90:  file_name=trim(meshpath)//'cavity_flag_nod2d.out'
+oce_read_mesh.F90:     if(mapping(n)>0) cavity_flag_nod2d(mapping(n))=n1
+oce_read_mesh.F90:  allocate(cavity_flag_extended(toDim_nod2d))
+oce_read_mesh.F90:  cavity_flag_extended=0
+oce_read_mesh.F90:     if(any(cavity_flag_nod2d(elem2d_nodes(:,n))==1)) then
+oce_read_mesh.F90:        cavity_flag_extended(elem2d_nodes(:,n))=1
+oce_read_mesh.F90:#ifdef use_cavity
+oce_read_mesh.F90:  ! 1 under cavity, 0 outside cavity
+Übereinstimmungen in Binärdatei oce_read_mesh.o.
+oce_rhs_dyn.F90:     !Wind/ice stress, or stress from ice-cavity    
+oce_rhs_dyn.F90:        !Wind/ice stress contribution, or stress from ice-cavity    
+oce_rhs_dyn.F90:#ifdef use_cavity
+oce_rhs_dyn.F90:        if(all(cavity_flag_nod2d(elnodes2)==0)) then   
+oce_rhs_dyn.F90:#ifdef use_cavity
+Übereinstimmungen in Binärdatei oce_rhs_dyn.o.
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:     if(all(cavity_flag_nod2d(elnodes2)==0)) then   
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:     if(all(cavity_flag_nod2d(elnodes2)==0)) then   
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:     if(cavity_flag_nod2d(row)==1) then  
+oce_rhs_tra.F90:#ifdef use_cavity
+oce_rhs_tra.F90:     if(cavity_flag_nod2d(row)==1) then  
+Übereinstimmungen in Binärdatei oce_rhs_tra.o.
+oce_salt_balance.F90:#ifdef use_cavity
+oce_salt_balance.F90:     if(cavity_flag_nod2d(row)==1) cycle   
+oce_salt_balance.F90:#ifdef use_cavity
+oce_salt_balance.F90:     if(cavity_flag_nod2d(row)==1) cycle   
+Übereinstimmungen in Binärdatei oce_salt_balance.o.
+oce_shortwave_pene.F90:#ifdef use_cavity
+oce_shortwave_pene.F90:     if(cavity_flag_nod2d(n2)==1) cycle   
+Übereinstimmungen in Binärdatei oce_shortwave_pene.o.

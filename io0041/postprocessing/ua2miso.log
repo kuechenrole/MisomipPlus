@@ -1,0 +1,77 @@
+started on ollie1 ...
+[36;48mAvailable matlab-versions are: >R2015b R2016a R2016b R2017a R2017b R2018a R2018b R2019a R2019b(default) R2020b<
+[0m[36;48mUsing already loaded matlab module/version: matlab/R2020b
+[0m[36;48mPersonal license for >orichter< available for nodes: >prod-0304 ollie0 license_fat-0004.lic fat-0004<
+[0m[35;48m------- Currently used ressources (squeue -o "%16R %.9P %.8j %.8u %.2t %.10M %.6c %.8m %.10l %.10L") ------------------
+[0mNODELIST(REASON) PARTITION     NAME     USER ST       TIME MIN_CP MIN_MEMO TIME_LIMIT  TIME_LEFT    JOBID UsedMEM
+fat-0004            matlab matlab.x   sharig  R    6:59:39      1      50G   12:00:00    5:00:21 13938907 50G,node=1
+fat-0004            matlab matlab.x orichter  R       1:34      8    1663M   12:00:00   11:58:26 13941500 13304M,node=1
+fat-0004            matlab matlab.x orichter  R      12:46      8    1663M   12:00:00   11:47:14 13941489 13304M,node=1
+fat-0004            matlab matlab.x orichter  R    4:59:47      8    1663M   12:00:00    7:00:13 13939312 13304M,node=1
+fat-0004            matlab matlab.x  lhoeyns  R      27:37      1      60G   12:00:00   11:32:23 13941469 60G,node=1
+fat-0004            matlab matlab.x mrueckam  R    5:04:17      1      60G   12:00:00    6:55:43 13939293 60G,node=1
+fat-0004            matlab matlab.x   sdoshi  R      41:40      1      30G   12:00:00   11:18:20 13941447 30G,node=1
+[35;48m------- Currently used node-dependend ressources (sinfo --noheader -o " %C %m %n " -n<node>)------------------
+[0m#FREECPUs USEDCPUs TOTALMEM  USEDMEM       HOST             ULIC/FLIC     USER 
+Node=ollie0 User=- N=>0< USEDCPUs= FREECPUs= ULIC=
+Node=prod-0304 User=- N=>0< USEDCPUs=0 FREECPUs=36 ULIC=
+Node=fat-0004 User=lhoeyns+mrueckam+orichter+sdoshi+sharig N=>7< USEDCPUs=28 FREECPUs=8 ULIC=669980
+     -99      -99      -99        0     ollie0                -/YES      - 
+      36        0   120650        0  prod-0304                -/no       - 
+       8       28   490650    40112   fat-0004           669980/no       lhoeyns+mrueckam+orichter+sdoshi+sharig 
+[35;48m------- Drop nodes without sufficient resources --------------
+[0m[36;48mRequested CPUs: 4 (--cpus-per-task=X or -cX)
+[0m[36;48mRequested MEM: - (--mem=X in MByte)
+[0m[36;48mAvailable nodes for requested ressources are:
+[0m      36        0   120650        0  prod-0304                -/no       - 
+       8       28   490650    40112   fat-0004           669980/no       lhoeyns+mrueckam+orichter+sdoshi+sharig 
+[36;48mFound node witch is already in use of >orichter<: >fat-0004< :-)
+[0m[36;48mstarting >matlab -nojvm -r ua2miso('/work/ollie/orichter/MisomipPlus/io0041/uadata','/work/ollie/orichter/MisomipPlus/io0041/postprocessing/IceOcean1_COM_ice_UaFesom_SSAWeertman.nc',1,2401);exit< on >fat-0004<
+[0m[36;48musing >srun  --nodes=1 --pty --preserve-env  -pmatlab  --time=12:00:00 -c4 --nodelist=fat-0004 matlab -nojvm -r ua2miso('/work/ollie/orichter/MisomipPlus/io0041/uadata','/work/ollie/orichter/MisomipPlus/io0041/postprocessing/IceOcean1_COM_ice_UaFesom_SSAWeertman.nc',1,2401);exit
+[0msrun: job 13941505 queued and waiting for resources
+srun: job 13941505 has been allocated resources
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+MATLAB is selecting SOFTWARE OPENGL rendering.
+
+                                                                              < M A T L A B (R) >
+                                                                    Copyright 1984-2020 The MathWorks, Inc.
+                                                                    R2020b (9.9.0.1467703) 64-bit (glnxa64)
+                                                                                August 26, 2020
+
+ 
+For online documentation, see https://www.mathworks.com/support
+For product information, visit www.mathworks.com.
+ 
+
+	Non-Degree Granting Education License -- for use at non-degree granting, nonprofit,
+	educational organizations only.  Not for government, commercial, or other organizational use.
+
+time, elapsed time: 0.604s
+iceVolume, elapsed time: 636s
+iceVAF, elapsed time: 296s
+groundedArea, elapsed time: 246s
+xGL, elapsed time: 381s
+yGL, elapsed time: 385s
+iceThicknessGL, elapsed time: 519s
+uBaseGL, elapsed time: 519s
+vBaseGL, elapsed time: 510s
+uSurfaceGL, elapsed time: 504s
+vSurfaceGL, elapsed time: 543s
+uMeanGL, elapsed time: 531s
+vMeanGL, elapsed time: 539s
+x, elapsed time: 0.257s
+y, elapsed time: 0.239s
+iceThickness, elapsed time: 1.31e+03s
+upperSurface, elapsed time: 1.39e+03s
+lowerSurface, elapsed time: 1.52e+03s
+basalMassBalance, elapsed time: 1.49e+03s
+groundedMask, elapsed time: 2.11e+03s
+floatingMask, elapsed time: 2.41s
+basalTractionMagnitude, elapsed time: 1.49e+03s
+uBase, elapsed time: 1.32e+03s
+vBase, elapsed time: 1.29e+03s
+uSurface, elapsed time: 1.31e+03s
+vSurface, elapsed time: 1.3e+03s
+uMean, elapsed time: 1.31e+03s
+vMean, elapsed time: 1.4e+03s

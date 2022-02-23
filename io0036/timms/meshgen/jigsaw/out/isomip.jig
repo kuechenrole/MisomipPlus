@@ -1,0 +1,10 @@
+# isomip.jig config. file; created by JIGSAW's MATLAB interface
+  GEOM_FEAT=true
+  GEOM_FILE=jigsaw/geo/isomip-GEOM.msh
+  HFUN_FILE=jigsaw/out/isomip-HFUN.msh
+  HFUN_HMAX=Inf
+  HFUN_HMIN=0
+  HFUN_SCAL=absolute
+  MESH_DIMS=2
+  MESH_FILE=jigsaw/out/isomip-MESH.msh
+  MESH_TOP1=true

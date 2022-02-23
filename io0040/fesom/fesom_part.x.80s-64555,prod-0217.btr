@@ -1,0 +1,11 @@
+
+fesom_part.x:64555 terminated with signal 11 at PC=2aaab261ea7b SP=7fffffff9830.  Backtrace:
+/global/AWIsoft/intel/2018/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64/libiomp5.so(+0x12ca7b)[0x2aaab261ea7b]
+/global/AWIsoft/intel/2018/compilers_and_libraries_2018.5.274/linux/compiler/lib/intel64/libiomp5.so(+0x12f44a)[0x2aaab262144a]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x43f1ca]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x4079e6]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x4041e6]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x40c213]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x40379e]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2aaab4259445]
+/home/ollie/orichter/fesom/RG47911/fesom_part.x[0x4036a9]

@@ -1,0 +1,100 @@
+!MPEH5C_20C files contain 141 years of data: 1860-2000
+!Daily datsets have 365 days/year and consider leap years!
+!RT 29.10.11
+
+  ! 10-m wind m/s ----------------------------------------
+
+   file=trim(ForcingDataPath)//'uwind_00.nc'
+   vari='u10'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+
+   file=trim(ForcingDataPath)//'vwind_00.nc'
+   vari='v10'
+   call read_eraint_NetCDF(file, vari, itime, array_nc2)
+   call upside_down(array_nc2,nci,ncj)
+
+   ! rotate wind
+   if(rotated_grid) call rotate_eraint_wind(array_nc,array_nc2)
+
+   ! interp wind to model grid
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,u_wind_t(i,:),n2)    
+   call forcing_linear_ip(array_nc2,nci,ncj,lint_ind,lint_weight,v_wind_t(i,:),n2) 
+!   write(*,*)'rotated u,v ',i, array_nc(10,10),array_nc2(10,10),u_wind_t(i,100),v_wind_t(i,100)
+
+
+   ! temperature -------------------------------------
+
+   file=trim(ForcingDataPath)//'tair_00.nc'
+   vari='t2m'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,Tair_t(i,:),n2)   
+   Tair_t(i,:)=Tair_t(i,:)-tmelt  ! Kelvin --> degree Celcius  ! RT approved 29.10.11
+
+   ! dew point temperature -------------------------------------
+
+   file=trim(ForcingDataPath)//'tdew_00.nc'
+   vari='d2m'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,Tdew_t(i,:),n2)   
+   Tdew_t(i,:)=Tdew_t(i,:)-tmelt  ! Kelvin --> degree Celcius  ! RT approved 29.10.11
+
+
+! short wave radiation W/m2 --------------------------------------
+   file=trim(ForcingDataPath)//'dswrf_00_12.nc'
+   vari='ssrd'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+!   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shortwave_e(1,:),n2)   
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shortwave_t(i,:),n2)
+   shortwave_t(i,:)=shortwave_t(i,:)/21600./2.
+
+!   file=trim(ForcingDataPath)//'dswrf_06.nc'
+!   vari='ssrd'
+!   call read_eraint_NetCDF(file, vari, itime, array_nc)
+!   call upside_down(array_nc,nci,ncj)
+!   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shortwave_e(2,:),n2)
+
+!   shortwave_t(i,:)=(shortwave_e(2,:)-shortwave_e(1,:))/6./3600.
+
+! long wave radiation W/m2 ---------------------------------------
+   file=trim(ForcingDataPath)//'dlwrf_00_12.nc'
+   vari='strd'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+!   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,longwave_e(1,:),n2)  
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,longwave_t(i,:),n2)
+   longwave_t(i,:)=longwave_t(i,:)/21600./2.
+
+!   file=trim(ForcingDataPath)//'dlwrf_06.nc'
+!   vari='strd'
+!   call read_eraint_NetCDF(file, vari, itime, array_nc)
+!   call upside_down(array_nc,nci,ncj)
+!   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,longwave_e(2,:),n2)
+
+!   longwave_t(i,:)=(longwave_e(2,:)-longwave_e(1,:))/6./3600.
+
+  !==========================================================================
+  ! precipitation
+
+   file=trim(ForcingDataPath)//'precip_00_12.nc'
+   vari='tp'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,prec_rain_t(i,:),n2) 
+   prec_rain_t(i,:)=prec_rain_t(i,:)/21600./2.  ! kg/m2/s --> m/s  ! RT approved 29.10.11
+
+
+  !==========================================================================
+  ! evaporation
+
+   file=trim(ForcingDataPath)//'evap_00_12.nc'
+   vari='e'
+   call read_eraint_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,evaporation_t(i,:),n2) 
+   evaporation_t(i,:)=-evaporation_t(i,:)/21600./2. 
+  
+  ! sea level pressure not available on a daily basis-------------------------------------

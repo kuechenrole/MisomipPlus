@@ -1,0 +1,50 @@
+#!/bin/bash
+#PBS -j oe
+#PBS -N RG45971
+#PBS -l walltime=02:00:00
+#PBS -l nodes=22:ppn=24
+#PBS -q mpp2q
+#PBS -A hbk00034
+#PBS -V
+
+echo $NCPUS
+
+export OMP_WAIT_POLICY=PASSIVE
+export CRAY_OMP_CHECK_AFFINITY=TRUE
+export OMP_NUM_THREADS=1
+
+export runid='RG45971'
+export outputdir=/gfs2/work/hbkratim/data
+
+
+
+cd ~/fesom/$runid
+pwd
+rm goonfile
+
+#rm namelist.config
+#sleep 10
+#cp namelist.config.2880steps namelist.config
+#cp namelist.config.960steps namelist.config
+#sleep 10
+
+#rm namelist.oce
+#cp namelist.oce.smoothstart namelist.oce
+#cp namelist.oce.smoothstart.extreme namelist.oce
+
+date
+aprun -B fesom_part.x > $outputdir/$runid_part.output
+date
+aprun -B fesom.x> $outputdir/$runid.output
+date
+
+if [ -f goonfile ]
+then
+    echo the goonfile exists - smile and submit next job
+#    msub fesom_februar.pbs
+    msub fesom_nextmonth.pbs
+else
+    echo the goonfile does not exist - end of happy job chain
+fi
+
+

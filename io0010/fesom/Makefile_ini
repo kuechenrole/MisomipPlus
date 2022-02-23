@@ -1,0 +1,58 @@
+######################################################
+# Makefile for routines of preparing parallelization              
+######################################################
+
+######################################################
+# Include architecture-specific definitions
+
+include make_inc
+
+
+######################################################
+# modules
+MODULES =	oce_modules.o                 	 	\
+		gen_modules_config.o			
+
+                
+
+# objects
+OBJECTS=   	gen_partitioning.o          		\
+                fesom_partition_init.o                    		
+
+######################################################
+# Name of executables
+
+EXE = fesom_part.x
+
+######################################################
+# Settings for solver libraries and FoSSI
+
+# Solver Libraries
+LIB_DIRS = -L$(FOSD)/lib $(RPATH)
+LIB_METIS = -L$(METIS_LPATH) -l$(METLIB)
+LIB_PET= -I$(PETSC_INC) -L$(PETSC_LPATH) -lpetscksp -lpetscsnes -lpetscmat -lpetscvec -lpetsc -lpetscdm $(LIB_X11)
+
+LIBS_SOLVER = $(LIB_DIRS) $(LIB_FOSSI) $(LIB_METIS) $(LIB_PET) $(LIB_LAP) $(LIB_BLAS) $(LIB_MPI) $(LIB_EXTRA) $(LIB_HYP)
+
+# Include path for FoSSI header files
+FOS_INC = -I$(FOSD)/include 
+
+######################################################
+# TARGETS
+
+$(EXE): $(MODULES) $(OBJECTS)
+	rm -f $(EXE)
+	$(LD)  $(OPT)  -o $(EXE) $(FOS_INC) $(MODULES) $(OBJECTS) \
+	$(LIBS_SOLVER) $(NCLIB) $(LIBS)
+
+.SUFFIXES: .F90 .o 
+
+.F90.o :
+	$(FC) $(OPT) $(CPP_DEFS) -I$(PETSC_INC) -I$(PETSC_INC)/.. \
+	-I$(PETSCCONF_INC) $(FOS_INC) \
+	$(MPI_INC) $(NCINC) -c $*.F90
+
+clean :
+	rm -f *.o *.mod *~ *.f90 $(EXE)
+
+

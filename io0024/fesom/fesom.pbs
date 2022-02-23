@@ -1,0 +1,42 @@
+#!/bin/bash
+#PBS -j oe
+#PBS -N RG45970
+#PBS -l walltime=02:00:00
+#PBS -l nodes=22:ppn=24
+#PBS -q mpp2q
+#PBS -A hbk00034
+#PBS -V
+
+echo $NCPUS
+export OMP_WAIT_POLICY=PASSIVE
+export CRAY_OMP_CHECK_AFFINITY=TRUE
+export OMP_NUM_THREADS=1
+
+cd /home/h/hbkratim/fesom/RG45970
+rm goodfile
+
+rm namelist.oce
+sleep 10
+cp namelist.oce.norm namelist.oce
+sleep 15
+
+
+date
+hostname
+aprun -B fesom.x > /gfs2/work/hbkratim/data/RG45970.output
+date
+
+echo
+
+
+if [ -f goodfile ]
+then
+    echo the goodfile exists - smile and submit next job
+    msub fesom.pbs
+else
+    echo the goodfile does not exist - end of happy job chain
+fi
+
+date
+
+exit

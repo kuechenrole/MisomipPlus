@@ -1,0 +1,9 @@
+# EXAMPLE1.jig config. file; created by JIGSAW's MATLAB interface
+  GEOM_FILE=jigsaw/geo/EXAMPLE1-GEOM.msh
+  HFUN_FILE=jigsaw/out/EXAMPLE1-HFUN.msh
+  HFUN_HMAX=Inf
+  HFUN_HMIN=0
+  HFUN_SCAL=absolute
+  MESH_DIMS=2
+  MESH_FILE=jigsaw/out/EXAMPLE1-MESH.msh
+  OPTM_ITER=0

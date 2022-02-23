@@ -1,0 +1,29 @@
+#!/bin/bash
+#PBS -j oe
+#PBS -N RG46421t1
+#PBS -l walltime=00:15:00
+#PBS -l nodes=80:ppn=24
+#PBS -q mpp1q
+#PBS -A hbk00038
+#PBS -V
+
+echo $NCPUS
+
+export OMP_WAIT_POLICY=PASSIVE
+export CRAY_OMP_CHECK_AFFINITY=TRUE
+export OMP_NUM_THREADS=1
+
+cd /home/h/hbkratim/fesom/RG46421t1/
+rm goodfile
+
+rm namelist.oce
+cp namelist.oce.highfric namelist.oce
+
+date
+hostname
+aprun -B fesom.x > /gfs2/work/hbkratim/data/RG46421t1.output
+date
+
+echo
+
+exit

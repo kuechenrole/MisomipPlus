@@ -1,0 +1,135 @@
+  ! 10-m wind m/s ----------------------------------------
+
+   if (wind_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'uas_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (wind_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'uas_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized wind_data_source in read_hadgem2_data.incF90'
+    stop
+   endif
+   vari='uas'
+   call read_hadgem2_vec(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+
+   if (wind_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'vas_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (wind_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'vas_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized wind_data_source in read_hadgem2_data.incF90'
+    stop
+   endif
+   vari='vas'
+   call read_hadgem2_vec(file, vari, itime, array_nc2)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+
+   ! rotate wind
+   if(rotated_grid) call rotate_hadgem2_wind(array_nc,array_nc2)
+
+   ! interp wind to model grid
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,u_wind_t(i,:),n2)    
+   call forcing_linear_ip(array_nc2,nci,ncj,lint_ind,lint_weight,v_wind_t(i,:),n2) 
+   write(*,*)'rotated u,v ',i, array_nc(10,10),array_nc2(10,10),u_wind_t(i,100),v_wind_t(i,100)
+
+
+   ! temperature -------------------------------------
+
+   if (wind_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'tas_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (wind_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'tas_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized wind_data_source in read_hadgem2_data.incF90: temperature'
+    stop
+   endif
+   vari='tas'
+   call read_hadgem2_scal(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,Tair_t(i,:),n2)   
+   Tair_t(i,:)=Tair_t(i,:)-tmelt  ! Kelvin --> degree Celcius
+
+
+! specific humdity  Kg/Kg -------------------------
+   if (wind_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'huss_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (wind_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'huss_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized wind_data_source in read_hadgem2_data.incF90: humidity'
+    stop
+   endif
+   vari='huss'
+   call read_hadgem2_scal(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shum_t(i,:),n2) 
+
+! short wave radiation W/m2 --------------------------------------
+   if (rad_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'rsds_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (rad_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'rsds_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized rad_data_source in read_hadgem2_data.incF90: shortwave radiation'
+    stop
+   endif
+   vari='rsds'
+   call read_hadgem2_scal(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shortwave_t(i,:),n2)   
+
+! long wave W/m2 ---------------------------------------
+   if (rad_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'rlds_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (rad_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'rlds_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized rad_data_source in read_hadgem2_data.incF90: longwave radiation'
+    stop
+   endif
+   vari='rlds'
+   call read_hadgem2_scal(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,longwave_t(i,:),n2)  
+
+
+  !==========================================================================
+  ! precipitation
+
+   if (precip_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'pr_day_HadGEM2-ES_historical_r1i1p1_19491201-20051130.nc'
+   else if (precip_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'pr_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized precip_data_source in read_hadgem2_data.incF90: precipitation'
+    stop
+   endif
+   vari='pr'
+   call read_hadgem2_scal(file, vari, itime, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+  call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,prec_rain_t(i,:),n2) 
+  prec_rain_t(i,:)=prec_rain_t(i,:)/1000.  ! kg/m2/s --> m/s
+
+
+  !==========================================================================
+  ! evaporation
+
+   if (precip_data_source.eq.'HadGem2_20C') then
+    file=trim(ForcingDataPath)//'evspsbl_day_HadGEM2-ES_historical_r1i1p1_19341216-20051116.nc'
+    itime_evspsbl=itime+15*360-15   ! different starting data for this file
+   else if (precip_data_source.eq.'HadGem2_RCP85') then
+    file=trim(ForcingDataPath)//'evspsbl_day_HadGEM2-ES_rcp85_r1i1p1_20050101-20991230.nc'
+   else
+    write(*,*)'unrecognized precip_data_source in read_hadgem2_data.incF90: evaporation'
+    stop
+   endif
+   vari='evspsbl'
+   call read_hadgem2_scal(file, vari, itime_evspsbl, array_nc)
+!RT: call upside_down is not needed because HadGem2 data start in the south
+  call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,evaporation_t(i,:),n2) 
+  evaporation_t(i,:)=evaporation_t(i,:)/1000.  ! kg/m2/s --> m/s
+  
+  
+  ! sea level pressure -------------------------------------
+  Pair_t(:,:)=1013.e2  ! [Pa]
+

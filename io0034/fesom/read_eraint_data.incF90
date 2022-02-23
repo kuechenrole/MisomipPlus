@@ -1,0 +1,85 @@
+!MPEH5C_20C files contain 141 years of data: 1860-2000
+!Daily datsets have 365 days/year and consider leap years!
+!RT 29.10.11
+
+  ! 10-m wind m/s ----------------------------------------
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_uas_1-51500.nc'
+   vari='uas'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_vas_1-51500.nc'
+   vari='vas'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc2)
+   call upside_down(array_nc2,nci,ncj)
+
+   ! rotate wind
+   if(rotated_grid) call rotate_mpeh5c_wind(array_nc,array_nc2)
+
+   ! interp wind to model grid
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,u_wind_t(i,:),n2)    
+   call forcing_linear_ip(array_nc2,nci,ncj,lint_ind,lint_weight,v_wind_t(i,:),n2) 
+!   write(*,*)'rotated u,v ',i, array_nc(10,10),array_nc2(10,10),u_wind_t(i,100),v_wind_t(i,100)
+
+
+   ! temperature -------------------------------------
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_tas_1-51500.nc'
+   vari='tas'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,Tair_t(i,:),n2)   
+   Tair_t(i,:)=Tair_t(i,:)-tmelt  ! Kelvin --> degree Celcius  ! RT approved 29.10.11
+
+   ! dew point temperature -------------------------------------
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_tdps_1-51500.nc'
+   vari='tdps'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,Tdew_t(i,:),n2)   
+   Tdew_t(i,:)=Tdew_t(i,:)-tmelt  ! Kelvin --> degree Celcius  ! RT approved 29.10.11
+
+
+! short wave radiation W/m2 --------------------------------------
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_rsds_1-51500.nc'
+   vari='rsds'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,shortwave_t(i,:),n2)   
+
+! long wave radiation W/m2 ---------------------------------------
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_rlds_1-51500.nc'
+   vari='rlds'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,longwave_t(i,:),n2)  
+
+
+  !==========================================================================
+  ! precipitation
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_pr_1-51500.nc'
+   vari='pr'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,prec_rain_t(i,:),n2) 
+   prec_rain_t(i,:)=prec_rain_t(i,:)/1000.  ! kg/m2/s --> m/s  ! RT approved 29.10.11
+
+
+  !==========================================================================
+  ! evaporation
+
+   file=trim(ForcingDataPath)//'MPEH5C_20C3M_1_DM_evspsbl_1-51500.nc'
+   vari='evspsbl'
+   call read_mpeh5c_NetCDF(file, vari, itime, array_nc)
+   call upside_down(array_nc,nci,ncj)
+   call forcing_linear_ip(array_nc,nci,ncj,lint_ind,lint_weight,evaporation_t(i,:),n2) 
+   evaporation_t(i,:)=-evaporation_t(i,:)/1000.  ! kg/m2/s --> m/s ! RT approved 29.10.11 
+                                                 ! Change of sign added RT 01.11.11,
+                                                 ! because data are < 0 over ocean in file.
+   
+  
+  
+  ! sea level pressure not available on a daily basis-------------------------------------

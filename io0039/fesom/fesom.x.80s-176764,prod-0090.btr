@@ -1,0 +1,7 @@
+
+fesom.x:176764 terminated with signal 11 at PC=479272 SP=7ffffffe3640.  Backtrace:
+/home/ollie/orichter/MisomipPlus/io0018/fesom/fesom.x[0x479272]
+/home/ollie/orichter/MisomipPlus/io0018/fesom/fesom.x[0x4f69f4]
+/home/ollie/orichter/MisomipPlus/io0018/fesom/fesom.x[0x404ede]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2aaab4259445]
+/home/ollie/orichter/MisomipPlus/io0018/fesom/fesom.x[0x404de9]

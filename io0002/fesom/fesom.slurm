@@ -1,0 +1,37 @@
+#!/bin/sh
+#SBATCH --nodes=1 
+#SBATCH --ntasks-per-node=36
+#SBATCH --time=01:30:00
+#SBATCH --job-name="F0002"
+#SBATCH -o /work/ollie/orichter/MisomipPlus/io0002/fesomrun/slurm-%j.out
+#SBATCH -p mpp
+
+module load intel.compiler
+module load intel.mpi
+module load netcdf
+module list
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/global/AWIsoft/metis/5.1.0_intel/lib
+
+ulimit -s unlimited 
+
+##rm goonfile
+EXE=${PWD}/fesom_part.x
+echo now run $EXE
+srun --mpi=pmi2 -n 36 --tasks-per-node=36  ${EXE}
+
+EXE=${PWD}/fesom.x
+echo now run $EXE
+srun --mpi=pmi2 -n 36 --tasks-per-node=36  ${EXE}
+
+##if [ -f goonfile ]; then
+## echo "goonfile exists, launch next job"
+## sbatch fesom_nextmonth.slurm
+##else 
+## echo "goonfile does not exist, we do break the chain here"
+##fi 
+
+
+
+
+

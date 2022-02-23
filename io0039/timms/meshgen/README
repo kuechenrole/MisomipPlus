@@ -1,0 +1,18 @@
+jigsaw2fesomUa;
+	* takes box full of triangels
+	* interpolation of ua GF mask to fesom-nodes (NN)
+	* remove all elements with at least one grounded node
+makeTopoUa;
+	* inerpolates draft (and bedrock) from ua to fesom nodes (linear)
+	* calving + min ice thickness
+	* min wct through digging
+	* remove lonely elements (elements connected to the rest by only one edge)
+ensure_minLayers_ovl;
+	* ensure a min overlap of adjacent water columns by at least one element through digging
+reorder;
+	* reorder indices for performence
+makeFesom3d;
+	* wall momentum bry (free slip, no-slip; GL can be set individually)
+makeCavity;
+	* ice face momentum bry condition (no-slip, free slip)
+

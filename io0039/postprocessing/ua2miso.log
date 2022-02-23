@@ -1,0 +1,79 @@
+started on ollie1 ...
+[36;48mAvailable matlab-versions are: >R2015b R2016a R2016b R2017a R2017b R2018a R2018b R2019a R2019b(default) R2020b<
+[0m[36;48mUsing already loaded matlab module/version: matlab/R2020b
+[0m[36;48mPersonal license for >orichter< available for nodes: >prod-0304 ollie0 license_fat-0004.lic fat-0004<
+[0m[35;48m------- Currently used ressources (squeue -o "%16R %.9P %.8j %.8u %.2t %.10M %.6c %.8m %.10l %.10L") ------------------
+[0mNODELIST(REASON) PARTITION     NAME     USER ST       TIME MIN_CP MIN_MEMO TIME_LIMIT  TIME_LEFT    JOBID UsedMEM
+fat-0004            matlab job_C.ru vkolatsc  R    1:24:12      1      90G   12:00:00   10:35:48 13941594 90G,node=1
+fat-0004            matlab matlab.x   sharig  R    8:59:08      1      50G   12:00:00    3:00:52 13938907 50G,node=1
+fat-0004            matlab matlab.x orichter  R    1:59:29      4    1663M   12:00:00   10:00:31 13941505 6652M,node=1
+fat-0004            matlab matlab.x orichter  R    2:01:03      8    1663M   12:00:00    9:58:57 13941500 13304M,node=1
+fat-0004            matlab matlab.x orichter  R    2:12:15      8    1663M   12:00:00    9:47:45 13941489 13304M,node=1
+fat-0004            matlab matlab.x orichter  R    6:59:16      8    1663M   12:00:00    5:00:44 13939312 13304M,node=1
+fat-0004            matlab matlab.x  lhoeyns  R      51:06      1      60G   12:00:00   11:08:54 13941873 60G,node=1
+fat-0004            matlab matlab.x  lhoeyns  R    2:27:06      1      60G   12:00:00    9:32:54 13941469 60G,node=1
+fat-0004            matlab matlab.x mrueckam  R    7:03:46      1      60G   12:00:00    4:56:14 13939293 60G,node=1
+fat-0004            matlab matlab.x   sdoshi  R    2:41:09      1      30G   12:00:00    9:18:51 13941447 30G,node=1
+[35;48m------- Currently used node-dependend ressources (sinfo --noheader -o " %C %m %n " -n<node>)------------------
+[0m#FREECPUs USEDCPUs TOTALMEM  USEDMEM       HOST             ULIC/FLIC     USER 
+Node=ollie0 User=- N=>0< USEDCPUs= FREECPUs= ULIC=
+Node=prod-0304 User=- N=>0< USEDCPUs=0 FREECPUs=36 ULIC=
+Node=fat-0004 User=lhoeyns+mrueckam+orichter+sdoshi+sharig+vkolatsc N=>10< USEDCPUs=34 FREECPUs=2 ULIC=669980
+     -99      -99      -99        0     ollie0                -/YES      - 
+      36        0   120650        0  prod-0304                -/no       - 
+       2       34   490650    46914   fat-0004           669980/no       lhoeyns+mrueckam+orichter+sdoshi+sharig+vkolatsc 
+[35;48m------- Drop nodes without sufficient resources --------------
+[0m[36;48mRequested CPUs: 8 (--cpus-per-task=X or -cX)
+[0m[36;48mRequested MEM: - (--mem=X in MByte)
+[0m[36;48mAvailable nodes for requested ressources are:
+[0m      36        0   120650        0  prod-0304                -/no       - 
+[36;48mFound NO free licence, must use floating license :-( on node >prod-0304<
+[0m[36;48mstarting >matlab -nojvm -r ua2miso('/work/ollie/orichter/MisomipPlus/io0039/uadata','/work/ollie/orichter/MisomipPlus/io0039/postprocessing/IceOcean1_COM_ice_UaFesom_SSATsai.nc',1,2401);exit< on >prod-0304<
+[0m[36;48musing >srun  --nodes=1 --pty --preserve-env  -pmatlab  --time=12:00:00 -c8 --nodelist=prod-0304 matlab -nojvm -r ua2miso('/work/ollie/orichter/MisomipPlus/io0039/uadata','/work/ollie/orichter/MisomipPlus/io0039/postprocessing/IceOcean1_COM_ice_UaFesom_SSATsai.nc',1,2401);exit
+[0msrun: job 13941912 queued and waiting for resources
+srun: job 13941912 has been allocated resources
+srun: error: ioctl(TIOCGWINSZ): Inappropriate ioctl for device
+srun: error: Not using a pseudo-terminal, disregarding --pty option
+MATLAB is selecting SOFTWARE OPENGL rendering.
+
+                                                                              < M A T L A B (R) >
+                                                                    Copyright 1984-2020 The MathWorks, Inc.
+                                                                    R2020b (9.9.0.1467703) 64-bit (glnxa64)
+                                                                                August 26, 2020
+
+ 
+For online documentation, see https://www.mathworks.com/support
+For product information, visit www.mathworks.com.
+ 
+
+	Non-Degree Granting Education License -- for use at non-degree granting, nonprofit,
+	educational organizations only.  Not for government, commercial, or other organizational use.
+
+time, elapsed time: 0.594s
+iceVolume, elapsed time: 288s
+iceVAF, elapsed time: 274s
+groundedArea, elapsed time: 273s
+xGL, elapsed time: 558s
+yGL, elapsed time: 552s
+iceThicknessGL, elapsed time: 701s
+uBaseGL, elapsed time: 711s
+vBaseGL, elapsed time: 785s
+uSurfaceGL, elapsed time: 763s
+vSurfaceGL, elapsed time: 806s
+uMeanGL, elapsed time: 738s
+vMeanGL, elapsed time: 694s
+x, elapsed time: 0.231s
+y, elapsed time: 0.212s
+iceThickness, elapsed time: 1.3e+03s
+upperSurface, elapsed time: 1.29e+03s
+lowerSurface, elapsed time: 1.28e+03s
+basalMassBalance, elapsed time: 1.29e+03s
+groundedMask, elapsed time: 1.75e+03s
+floatingMask, elapsed time: 2.16s
+basalTractionMagnitude, elapsed time: 1.42e+03s
+uBase, elapsed time: 1.33e+03s
+vBase, elapsed time: 1.3e+03s
+uSurface, elapsed time: 1.32e+03s
+vSurface, elapsed time: 1.37e+03s
+uMean, elapsed time: 1.32e+03s
+vMean, elapsed time: 1.31e+03s

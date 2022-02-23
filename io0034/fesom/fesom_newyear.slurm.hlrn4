@@ -1,0 +1,27 @@
+#!/bin/sh
+#SBATCH -N 20
+#SBATCH --ntasks-per-node=96
+#SBATCH -t 04:00:00
+#SBATCH --job-name="RG45983"
+#SBATCH -p standard96
+#SBATCH -A hbk00034
+
+export SLURM_CPU_BIND=none
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(HOME)/lib/metis/5.1.0_intel/lib
+
+#set | grep SLURM_
+
+ulimit -s unlimited 
+
+rm -f goonfile
+rm -f goodfile
+
+EXE=${PWD}/fesom_part.x
+echo first do partitioning with $EXE
+mpirun ${EXE}
+
+EXE=${PWD}/fesom.x
+echo now run the model with $EXE
+mpirun ${EXE}
+

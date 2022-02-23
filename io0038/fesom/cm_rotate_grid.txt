@@ -1,0 +1,13 @@
+1a2,10
+>   ! for grid rotation, north pole to Greenland
+>   !
+>   ! Coded by Qiang Wang
+>   ! Reviewed by ??
+>   !----------------------------------------------------------------
+> 
+>   use g_config
+>   use g_parfe
+> 
+16,17d24
+<     use o_param
+<     use g_parfe

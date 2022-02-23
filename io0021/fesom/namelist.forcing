@@ -1,0 +1,29 @@
+! This is the namelist file for forcing
+
+&forcing_exchange_coeff
+Ce_atm_oce=1.75e-3 ! exchange coeff. of latent heat over open water
+Ch_atm_oce=1.75e-3 ! exchange coeff. of sensible heat over open water
+Cd_atm_oce=1.3e-3  ! drag coefficient between atmosphere and water
+Ce_atm_ice=1.75e-3 ! exchange coeff. of latent heat over ice
+Ch_atm_ice=1.75e-3 ! exchange coeff. of sensible heat over ice
+Cd_atm_ice=2.5e-3  ! drag coefficient between atmosphere and ice 
+/
+
+&forcing_source
+wind_data_source='HadCM3_20C'
+rad_data_source='HadCM3_20C'
+precip_data_source='HadCM3_20C'
+runoff_data_source='none'	!Dai09, CORE2
+sss_data_source='none'
+/
+
+&forcing_bulk
+AOMIP_drag_coeff=.false.
+ncar_bulk_formulae=.false.
+/
+
+&land_ice
+use_landice_water=.false.
+landice_start_mon=5
+landice_end_mon=10
+/

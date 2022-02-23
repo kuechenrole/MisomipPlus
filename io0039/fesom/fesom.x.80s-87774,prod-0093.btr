@@ -1,0 +1,16 @@
+
+fesom.x:87774 terminated with signal 11 at PC=2aaaab256eb6 SP=7fffffff15b0.  Backtrace:
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(+0x66eb6)[0x2aaaab256eb6]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(ncx_putn_float_float+0x32)[0x2aaaab2635fb]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(+0x4bc07)[0x2aaaab23bc07]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(+0x5c577)[0x2aaaab24c577]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(NC3_put_vara+0x499)[0x2aaaab24d83b]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(+0x31dfd)[0x2aaaab221dfd]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdf.so.13(nc_put_vara_float+0x3c)[0x2aaaab22323a]
+/global/AWIsoft/netcdf/4.6.2_gnu/lib/libnetcdff.so.6(nf_put_vara_real_+0x44a)[0x2aaaaaf58322]
+/home/ollie/orichter/MisomipPlus/io0038/fesom/fesom.x[0x4d9ae7]
+/home/ollie/orichter/MisomipPlus/io0038/fesom/fesom.x[0x4c5c54]
+/home/ollie/orichter/MisomipPlus/io0038/fesom/fesom.x[0x4f639e]
+/home/ollie/orichter/MisomipPlus/io0038/fesom/fesom.x[0x404ede]
+/lib64/libc.so.6(__libc_start_main+0xf5)[0x2aaab4259445]
+/home/ollie/orichter/MisomipPlus/io0038/fesom/fesom.x[0x404de9]
